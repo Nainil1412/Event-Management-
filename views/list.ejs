@@ -1,0 +1,135 @@
+<%- include ("header1"); -%>
+
+    <style>
+     pre {
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    margin: 1em 0;
+}
+
+      .footer {
+        position: relative;
+        bottom: 0;
+      }
+    </style>
+
+    <body style="margin-top: 100px; margin-left: 10px">
+      <h3 style="position: absolute; right:100px;">
+        <a class="btn btn-primary" href=" /event"
+          ><i class="fa fa-plus"></i> Create New</a
+        >
+      </h3>
+      <br>
+      <h2>
+        <center><b><u>Event List</b></u></center>
+      </h2>
+
+      <div class="row" id="events">
+        <% if (events != '') { %> <% events.forEach((row, index) => { %>
+
+        <div class="col-lg-6 mt-5">
+          <!-- <span style="font-weight: bold; font-size: 20px;">Event Image:</span>  -->
+          <span><img src="<%= row.image %>" width="440" height="300" /></span
+          ><br />
+          <span style="font-weight: bold; font-size: 20px">Event Name:</span>
+          <span style="font-size: 18px"><%= row.name %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Event Description:</span>
+          <pre><span style="font-size: 18px"><%= row.desc %></span></pre><br />
+          <span style="font-weight: bold; font-size: 20px">Event Date:</span>
+          <span style="font-size: 18px"><%= row.date %></span><br />
+          <span style="font-weight: bold; font-size: 20px">College Name:</span>
+          <span style="font-size: 18px"><%= row.clg %></span><br />
+          <span style="font-weight: bold; font-size: 20px"
+            >Committee Name:</span
+          >
+          <span style="font-size: 18px"><%= row.comm %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Event Type:</span>
+          <span style="font-size: 18px"><%= row.type %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Event Days:</span>
+          <span style="font-size: 18px"><%= row.days %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Sub Events:</span>
+          <span style="font-size: 18px"><%= row.subEvents %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Event Timings:</span>
+          <span style="font-size: 18px"><%= row.time %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Event Paid:</span>
+          <span style="font-size: 18px"><%= row.paid %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Event Venue:</span>
+          <span style="font-size: 18px"><%= row.venue %></span><br />
+          <span style="font-weight: bold; font-size: 20px">Action:</span>
+          <div class="d-flex">
+            <button
+              style="
+                background-color: #4154f1;
+                color: #fff;
+                border: 0px #4154f1;
+                border-radius: 4px;
+                padding: 10px 20px;
+              "
+            >
+              <a
+                href="/edit/<%= row._id %>"
+                style="color: #ffff; padding-right: 10px"
+                ><i
+                  class="fa fa-pencil fa-lg"
+                  aria-hidden="true"
+                  style="color: #fff; padding-right: 10px"
+                ></i
+                >Edit</a
+              >
+            </button>
+
+            <button
+              class="ml-2"
+              style="
+                background-color: #4154f1;
+                color: #fff;
+                border: 0px #4154f1;
+                border-radius: 4px;
+                padding: 10px 20px;
+              "
+            >
+              <a
+                href="/delete/<%= row._id %>"
+                onclick="return confirm('Are you sure to delete this record ?');"
+                style="color: #ffff; padding-right: 10px"
+                ><i
+                  class="fa fa-trash fa-lg"
+                  aria-hidden="true"
+                  style="color: #fff; padding-right: 10px"
+                ></i
+                >Delete</a
+              >
+            </button>
+          </div>
+          <% if(row.paid == 'Yes') { %>
+            <form style="color: #fff; padding: 10px 20px">
+              <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_JtaHBcBPFYdfCo" async>
+              </script> 
+              </form>
+        <% } else{ %>            
+          <div class="d-flex" style="padding: 10px 50px;">
+          <button
+            class="ml-2"
+            style="
+            padding: 10px 20px;
+              background-color: #4154f1;
+              color: #fff;
+              border: 0px #4154f1;
+              border-radius: 4px;
+            "
+          >Register</button>
+          </div>
+            
+       <% } %>
+         
+        </div>
+        <% }) %> <% } else { %>
+        <h1 class="text-center text-secondary mt-5">No events found</h1>
+        <% } %>
+      </div>
+    </body>
+
+    <%- include ("footer"); -%>
+  </head>
+</html>
